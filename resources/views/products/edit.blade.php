@@ -1,0 +1,75 @@
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Edit Product') }}
+            </h2>
+
+            <a href="{{ route('products.index') }}"
+                class="inline-flex items-
+center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold
+
+text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700
+active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500
+focus:ring-offset-2 transition ease-in-out duration-150">
+                Back
+            </a>
+        </div>
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    @if ($errors->any())
+                        <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500
+text-red-700">
+                            <p class="font-bold">Whoops! There were some problems
+                                with your input.</p>
+                            <ul class="mt-2 list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{ route('products.update', $product->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-6">
+
+                            <label for="name" class="block mb-2 text-sm font-
+medium text-gray-900">Name</label>
+
+                            <input type="text" id="name" name="name" value="{{ $product->name }}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        </div>
+
+
+                        <div class="mb-6">
+
+                            <label for="detail" class="block mb-2 text-sm font-
+medium text-gray-900">Detail</label>
+
+                            <textarea id="detail" name="detail" rows="6"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ $product->detail }}</textarea>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit"
+                                class="inline-flex items-center
+px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs
+ uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700
+
+active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-
+offset-2 transition ease-in-out duration-150">
+
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
